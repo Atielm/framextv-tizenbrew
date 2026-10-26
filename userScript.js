@@ -1,4 +1,5 @@
-// Runs at document start (evaluateScriptOnDocumentStart) before the site's code.
+// TizenBrew evaluates this when the page's context is created. evaluateScriptOnDocumentStart
+// is not used: with it, TizenBrew's launcher never opens the module.
 (function () {
   // FrameXTV bundles disable-devtool, which sees TizenBrew's debugger and sends the
   // page to about:blank (black screen). Cancel navigations that leave the site that way.
