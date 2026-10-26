@@ -11,6 +11,16 @@
   }
   window.close = function () {};
 
+  // The welcome modal cannot be focused with the remote. Mark it seen for next loads
+  // and press "Continue to site" if it is already showing.
+  try { localStorage.setItem('framextv_welcome_seen', 'true'); } catch (e) {}
+  var tries = 0;
+  var closeWelcome = setInterval(function () {
+    var btn = document.querySelector('[data-testid="welcome-continue-btn"]');
+    if (btn) btn.click();
+    if (btn || ++tries > 40) clearInterval(closeWelcome);
+  }, 250);
+
   // Maps the Samsung remote's media keys (Tizen keyCodes) to the page's video.
   // ponytail: only reaches a <video> in the top document; a cross-origin player
   // iframe cannot be scripted from here, so keys do nothing there.
