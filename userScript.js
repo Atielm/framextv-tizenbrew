@@ -1,7 +1,18 @@
-// Maps the Samsung remote's media keys (Tizen keyCodes) to the page's video.
-// ponytail: only reaches a <video> in the top document; a cross-origin player
-// iframe cannot be scripted from here, so keys do nothing there.
+// Runs at document start (evaluateScriptOnDocumentStart) before the site's code.
 (function () {
+  // FrameXTV bundles disable-devtool, which sees TizenBrew's debugger and sends the
+  // page to about:blank (black screen). Cancel navigations that leave the site that way.
+  if (window.navigation) {
+    navigation.addEventListener('navigate', function (e) {
+      var url = e.destination.url;
+      if (url === 'about:blank' || url.indexOf('disable-devtool') !== -1) e.preventDefault();
+    });
+  }
+  window.close = function () {};
+
+  // Maps the Samsung remote's media keys (Tizen keyCodes) to the page's video.
+  // ponytail: only reaches a <video> in the top document; a cross-origin player
+  // iframe cannot be scripted from here, so keys do nothing there.
   var SEEK_SECONDS = 10;
   var actions = {
     10252: function (v) { v.paused ? v.play() : v.pause(); }, // MediaPlayPause
