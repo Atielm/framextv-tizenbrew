@@ -1,0 +1,18 @@
+{
+  "name": "framextv-tizenbrew",
+  "appName": "FrameXTV",
+  "version": "1.0.0",
+  "description": "Opens FrameXTV in TizenBrew and maps the remote's media keys to the video player.",
+  "packageType": "mods",
+  "websiteURL": "https://framextv.cc",
+  "main": "userScript.js",
+  "keys": [
+    "MediaPlayPause",
+    "MediaPlay",
+    "MediaPause",
+    "MediaStop",
+    "MediaFastForward",
+    "MediaRewind"
+  ],
+  "license": "MIT"
+}
